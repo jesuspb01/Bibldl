@@ -521,6 +521,7 @@
   }
   @media (max-width: 520px) {
     .modos { display: grid; grid-template-columns: 1fr 1fr; }
+    .modos .modo:last-child:nth-child(odd) { grid-column: 1 / -1; }
   }
   @media (max-width: 380px) {
     .lampara { width: 34px; height: 28px; }
@@ -633,7 +634,8 @@
     <ul>
       <li><b>Versículo</b>: lee una cita y adivina quién la dijo o de quién habla. Cada fallo revela una pista.</li>
       <li><b>Emoji</b>: unos emojis representan al personaje. Cada fallo revela uno más.</li>
-      <li><b>Infinito</b>: un personaje al azar, para jugar todas las veces que quieras.</li>
+      <li><b>Infinito</b>: como el Clásico, pero con un personaje al azar, para jugar todas las veces que quieras.</li>
+      <li><b>Emoji infinito</b>: como el modo Emoji, pero con un personaje al azar en cada partida.</li>
     </ul>
     <p>Si te quedas sin ideas, pulsa <b>«Me rindo»</b> para ver la respuesta (en los modos diarios, rendirse rompe la racha). Cada medianoche llegan personajes nuevos. ¡Buena suerte!</p>
     <div class="centrado"><button class="placa" data-cerrar>¡A jugar!</button></div>
@@ -735,6 +737,31 @@ const PERSONAJES = [
   P("Herodías", "Nuevo", "Mujer", "Reina", "Vida de Jesús", "Idumeo", 0, "Desconocido", "💃 👧 🍽️ 😠 👑", "La cabeza de Juan el Bautista.", "Marcos 6:24"),
   P("José de Arimatea", "Nuevo", "Hombre", "Discípulo|Consejero", "Vida de Jesús", "Judío", 0, "Desconocido", "💰 🏛️ 🧻 🪨 🌿", "Y quitándolo, lo envolvió en una sábana, y lo puso en un sepulcro abierto en una peña.", "Lucas 23:53"),
   P("Simón de Cirene", "Nuevo", "Hombre", "Ninguno", "Vida de Jesús", "Cireneo", 0, "Desconocido", "🚶‍♂️ 🌾 ✝️ 💪 🛣️", "Tomaron a cierto hombre de Cirene, que venía del campo, y le pusieron encima la cruz para que la llevase tras Jesús.", "Lucas 23:26"),
+  // ---------- MÁS PERSONAJES DE LOS EVANGELIOS ----------
+  P("Claudia Prócula (mujer de Pilato)", "Nuevo", "Mujer", "Noble", "Vida de Jesús", "Romano", 0, "Desconocido", "💭 😴 🏛️ 📨 🦅", "No tengas nada que ver con ese justo; porque hoy he padecido mucho en sueños por causa de él.", "Mateo 27:19"),
+  P("Samaritana (del pozo)", "Nuevo", "Mujer", "Testigo", "Vida de Jesús", "Samaritano", 0, "Desconocido", "🏺 💧 ☀️ 🏘️ 🗣️", "Venid, ved a un hombre que me ha dicho todo cuanto he hecho. ¿No será este el Cristo?", "Juan 4:29"),
+  P("Santiago el Menor", "Nuevo", "Hombre", "Apóstol", "Vida de Jesús", "Judío", 1, "Desconocido", "🙋‍♂️ 👬 📜 ✨ 🤏", "María la madre de Jacobo el menor y de José, y Salomé.", "Marcos 15:40"),
+  P("Judas Tadeo", "Nuevo", "Hombre", "Apóstol", "Vida de Jesús", "Judío", 1, "Desconocido", "🙋‍♂️ ❓ 🕯️ 🙏 ✨", "Le dijo Judas (no el Iscariote): Señor, ¿cómo es que te manifestarás a nosotros, y no al mundo?", "Juan 14:22"),
+  P("Simón el Zelote", "Nuevo", "Hombre", "Apóstol", "Vida de Jesús", "Judío", 1, "Desconocido", "🙋‍♂️ 🔥 ⚔️ 👬 ✨", "Mateo, Tomás, Jacobo hijo de Alfeo, Simón llamado Zelote.", "Lucas 6:15"),
+  P("Malco", "Nuevo", "Hombre", "Siervo", "Vida de Jesús", "Judío", 0, "Siervo", "🌙 🗡️ 👂 🩹 ✨", "Simón Pedro, que tenía una espada, la desenvainó, e hirió al siervo del sumo sacerdote, y le cortó la oreja derecha. Y el siervo se llamaba Malco.", "Juan 18:10"),
+  P("Anás", "Nuevo", "Hombre", "Sacerdote", "Vida de Jesús", "Judío", 0, "Sacerdote", "👴 🏛️ 🌙 👨‍👦 ⚖️", "Y le llevaron primeramente a Anás; porque era suegro de Caifás, que era sumo sacerdote aquel año.", "Juan 18:13"),
+  P("Centurión de la cruz", "Nuevo", "Hombre", "Centurión", "Vida de Jesús", "Romano", 0, "Soldado", "🪖 ✝️ 🌑 😮 🗣️", "Verdaderamente este hombre era Hijo de Dios.", "Marcos 15:39"),
+  P("Dimas (buen ladrón)", "Nuevo", "Hombre", "Crucificado", "Vida de Jesús", "Judío", 0, "Bandido", "🗡️ ✝️ 🙏 🌅 😇", "Jesús, acuérdate de mí cuando vengas en tu reino.", "Lucas 23:42"),
+  P("Gestas (mal ladrón)", "Nuevo", "Hombre", "Crucificado", "Vida de Jesús", "Judío", 0, "Bandido", "🗡️ ✝️ 😠 🗣️ ⛓️", "Si tú eres el Cristo, sálvate a ti mismo y a nosotros.", "Lucas 23:39"),
+  P("Jairo", "Nuevo", "Hombre", "Jefe de sinagoga", "Vida de Jesús", "Judío", 0, "Jefe de sinagoga", "🕍 👧 🙏 🏃‍♂️ ✨", "Mi hija está agonizando; ven y pon las manos sobre ella para que sea salva, y vivirá.", "Marcos 5:23"),
+  P("Hija de Jairo", "Nuevo", "Mujer", "Resucitado", "Vida de Jesús", "Judío", 0, "Desconocido", "🛏️ 👧 😴 🤚 🚶‍♀️", "Talita cumi; que traducido es: Niña, a ti te digo, levántate.", "Marcos 5:41"),
+  P("Mujer adúltera", "Nuevo", "Mujer", "Perdonado", "Vida de Jesús", "Judío", 0, "Desconocido", "🪨 👥 ✍️ 🏃 🕊️", "Ni yo te condeno; vete, y no peques más.", "Juan 8:11"),
+  P("Mujer cananea", "Nuevo", "Mujer", "Creyente", "Vida de Jesús", "Cananeo", 0, "Desconocido", "👩 👧 🐕 🍞 🙏", "Sí, Señor; pero aun los perrillos comen de las migajas que caen de la mesa de sus amos.", "Mateo 15:27"),
+  P("Joven rico", "Nuevo", "Hombre", "Ninguno", "Vida de Jesús", "Judío", 0, "Desconocido", "🧑 💰 ❓ 😔 🐫", "Todo esto lo he guardado desde mi juventud. ¿Qué más me falta?", "Mateo 19:20"),
+  P("Zebedeo", "Nuevo", "Hombre", "Familia de apóstoles", "Vida de Jesús", "Judío", 0, "Pescador", "⛵ 🥅 👨‍👦‍👦 👋 🎣", "Y dejando a su padre Zebedeo en la barca con los jornaleros, le siguieron.", "Marcos 1:20"),
+  P("Buen samaritano", "Nuevo", "Hombre", "Personaje de parábola", "Vida de Jesús", "Samaritano", 0, "Desconocido", "🛣️ 🤕 🚶 🫒 🏨", "Y acercándose, vendó sus heridas, echándoles aceite y vino; y poniéndole en su cabalgadura, lo llevó al mesón, y cuidó de él.", "Lucas 10:34"),
+  P("Hijo pródigo", "Nuevo", "Hombre", "Personaje de parábola", "Vida de Jesús", "Judío", 0, "Porquero", "💰 🎉 🐖 🏠 🤗", "Padre, he pecado contra el cielo y contra ti, y ya no soy digno de ser llamado tu hijo.", "Lucas 15:21"),
+  P("Rico Epulón", "Nuevo", "Hombre", "Personaje de parábola", "Vida de Jesús", "Judío", 0, "Desconocido", "🍷 👔 🐕 🔥 💧", "Padre Abraham, ten misericordia de mí, y envía a Lázaro para que moje la punta de su dedo en agua, y refresque mi lengua.", "Lucas 16:24"),
+  P("Cleofás", "Nuevo", "Hombre", "Discípulo", "Vida de Jesús", "Judío", 0, "Desconocido", "🚶‍♂️ 🛣️ 🍞 🔥 👀", "¿No ardía nuestro corazón en nosotros, mientras nos hablaba en el camino?", "Lucas 24:32"),
+  P("Magos de Oriente", "Nuevo", "Hombre", "Sabio", "Vida de Jesús", "Oriental", 0, "Sabio", "⭐ 🐫 🎁 👶 👑", "¿Dónde está el rey de los judíos, que ha nacido? Porque su estrella hemos visto en el oriente, y venimos a adorarle.", "Mateo 2:2"),
+  P("Ángel Gabriel", "Nuevo", "Hombre", "Ángel", "Vida de Jesús", "Celestial", 0, "Mensajero", "🪽 ✨ 📢 👩 👶", "¡Salve, muy favorecida! El Señor es contigo; bendita tú entre las mujeres.", "Lucas 1:28"),
+  P("Simón el fariseo", "Nuevo", "Hombre", "Fariseo", "Vida de Jesús", "Judío", 0, "Desconocido", "🍽️ 🏠 🏺 🦶 💸", "Este, si fuera profeta, conocería quién y qué clase de mujer es la que le toca.", "Lucas 7:39"),
+  P("César Augusto", "Nuevo", "Hombre", "Emperador", "Vida de Jesús", "Romano", 0, "Emperador", "🏛️ 👑 📜 📋 🌍", "Aconteció en aquellos días, que se promulgó un edicto de parte de Augusto César, que todo el mundo fuese empadronado.", "Lucas 2:1"),
   P("Esteban", "Nuevo", "Hombre", "Diácono", "Iglesia primitiva", "Judío", 1, "Desconocido", "🪨 ☁️ 👀 🗣️ ✨", "He aquí, veo los cielos abiertos, y al Hijo del Hombre que está a la diestra de Dios.", "Hechos 7:56"),
   P("Pablo", "Nuevo", "Hombre", "Apóstol|Misionero", "Iglesia primitiva", "Judío", 1, "Fabricante de tiendas", "🛣️ 💡 👁️ 📨 ⛓️", "Todo lo puedo en Cristo que me fortalece.", "Filipenses 4:13"),
   P("Marcos", "Nuevo", "Hombre", "Evangelista|Misionero", "Iglesia primitiva", "Judío", 0, "Desconocido", "🦁 📜 ✍️ 🚢 🏃", "Toma a Marcos y tráele contigo, porque me es útil para el ministerio.", "2 Timoteo 4:11"),
@@ -758,7 +785,8 @@ const MODOS = [
   { id: "clasico", nombre: "Clásico", icono: "🏛️" },
   { id: "versiculo", nombre: "Versículo", icono: "📜" },
   { id: "emoji", nombre: "Emoji", icono: "😀" },
-  { id: "infinito", nombre: "Infinito", icono: "♾️" }
+  { id: "infinito", nombre: "Infinito", icono: "♾️" },
+  { id: "emojiinf", nombre: "Emoji infinito", icono: "🔁" }
 ];
 const SEMILLAS = { clasico: 20261019, versiculo: 7741, emoji: 93113 };
 const EMOJI_COLOR = { verde: "🟩", amarillo: "🟨", rojo: "🟥", neutro: "⬜" };
@@ -836,18 +864,23 @@ function stats(modo) {
 
 /* ---------- Estado de cada partida ---------- */
 let modo = MODOS.some(function (m) { return m.id === datos.modo; }) ? datos.modo : "clasico";
-let infinito = null;
+// Modos infinitos: personaje al azar en cada partida
+function esInf(m) { return m === "infinito" || m === "emojiinf"; }
+function esTabla(m) { return m === "clasico" || m === "infinito"; }
+function esEmoji(m) { return m === "emoji" || m === "emojiinf"; }
+const infinitos = {};
 
 function nuevoInfinito() {
-  const anterior = infinito ? infinito.secreto : -1;
+  const actual = infinitos[modo];
+  const anterior = actual ? actual.secreto : -1;
   let i;
   do { i = Math.floor(Math.random() * N); } while (i === anterior && N > 1);
-  infinito = { secreto: i, intentos: [], ganado: false };
+  infinitos[modo] = { secreto: i, intentos: [], ganado: false };
 }
 function partida(m) {
-  if (m === "infinito") {
-    if (!infinito) nuevoInfinito();
-    return infinito;
+  if (esInf(m)) {
+    if (!infinitos[m]) { const prev = modo; modo = m; nuevoInfinito(); modo = prev; }
+    return infinitos[m];
   }
   if (!datos.dias[HOY]) datos.dias[HOY] = {};
   if (!datos.dias[HOY][m]) datos.dias[HOY][m] = { intentos: [], ganado: false };
@@ -922,7 +955,7 @@ function dibujarModos() {
   MODOS.forEach(function (m) {
     const b = el("button", "modo" + (m.id === modo ? " activo" : ""));
     let ganado = false;
-    if (m.id !== "infinito" && datos.dias[HOY] && datos.dias[HOY][m.id]) ganado = datos.dias[HOY][m.id].ganado;
+    if (!esInf(m.id) && datos.dias[HOY] && datos.dias[HOY][m.id]) ganado = datos.dias[HOY][m.id].ganado;
     b.innerHTML = "<span>" + m.icono + "</span> " + m.nombre + (ganado ? ' <span class="hecho">✓</span>' : "");
     b.addEventListener("click", function () {
       if (modo === m.id) return;
@@ -941,9 +974,10 @@ function dibujarPista(g, sec) {
   const k = g.intentos.length;
   const fin = g.ganado || g.rendido;
   const textoIntentos = '<p class="intentos-texto">Intentos: ' + k + "</p>";
+  const botonNuevoHTML = '<p><button class="placa" id="botonNuevo">Nuevo personaje</button></p>';
   zonaPista.className = "tarjeta";
 
-  if (modo === "clasico" || modo === "infinito") {
+  if (esTabla(modo)) {
     const titulo = modo === "clasico" ? "Personaje del día" : "Modo Infinito";
     const texto = modo === "clasico"
       ? "Escribe el nombre de cualquier personaje bíblico. Las casillas te dirán cuánto te acercas."
@@ -957,14 +991,7 @@ function dibujarPista(g, sec) {
       '<span><i class="muestra neutro"></i>Sin datos</span>' +
       "</div>" +
       textoIntentos +
-      (modo === "infinito" ? '<p><button class="placa" id="botonNuevo">Nuevo personaje</button></p>' : "");
-    if (modo === "infinito") {
-      document.getElementById("botonNuevo").addEventListener("click", function () {
-        if (!infinito.ganado && !infinito.rendido && infinito.intentos.length) avisar("Era " + PERSONAJES[infinito.secreto].n);
-        nuevoInfinito();
-        dibujar(false);
-      });
-    }
+      (modo === "infinito" ? botonNuevoHTML : "");
   } else if (modo === "versiculo") {
     zonaPista.className = "tarjeta rollo";
     const fallos = g.ganado ? k - 1 : k;
@@ -982,16 +1009,27 @@ function dibujarPista(g, sec) {
       html += '<p class="proxima-pista">' + (visibles === 0 ? "Cada fallo revela una pista." : "Otra pista con el próximo fallo.") + "</p>";
     }
     zonaPista.innerHTML = html + textoIntentos;
-  } else if (modo === "emoji") {
+  } else if (esEmoji(modo)) {
     const fallos = fin ? sec.emo.length : k;
     const visibles = Math.min(1 + fallos, sec.emo.length);
-    let html = "<h2>¿Qué personaje representan estos emojis?</h2><div class=\"emojis\">";
+    let html = "<h2>" + (modo === "emojiinf" ? "Emoji infinito" : "¿Qué personaje representan estos emojis?") + "</h2>" +
+      (modo === "emojiinf" ? "<p>¿Qué personaje representan estos emojis? Uno nuevo al azar cada vez.</p>" : "") +
+      "<div class=\"emojis\">";
     sec.emo.forEach(function (e, i) {
       html += i < visibles ? '<span class="emoji">' + e + "</span>" : '<span class="emoji oculto">?</span>';
     });
     html += "</div>";
     if (!fin && visibles < sec.emo.length) html += '<p class="proxima-pista">Cada fallo revela un emoji más.</p>';
-    zonaPista.innerHTML = html + textoIntentos;
+    zonaPista.innerHTML = html + textoIntentos + (modo === "emojiinf" ? botonNuevoHTML : "");
+  }
+  const bn = document.getElementById("botonNuevo");
+  if (bn) {
+    bn.addEventListener("click", function () {
+      const actual = infinitos[modo];
+      if (!actual.ganado && !actual.rendido && actual.intentos.length) avisar("Era " + PERSONAJES[actual.secreto].n);
+      nuevoInfinito();
+      dibujar(false);
+    });
   }
   if (!fin) {
     const p = el("p");
@@ -1004,7 +1042,7 @@ function dibujarPista(g, sec) {
 
 function dibujarTablero(g, sec, animar) {
   tablero.innerHTML = "";
-  if ((modo !== "clasico" && modo !== "infinito") || g.intentos.length === 0) { tablero.hidden = true; return; }
+  if (!esTabla(modo) || g.intentos.length === 0) { tablero.hidden = true; return; }
   tablero.hidden = false;
 
   const cab = el("div", "fila");
@@ -1034,7 +1072,7 @@ function dibujarTablero(g, sec, animar) {
 
 function dibujarChips(g) {
   chips.innerHTML = "";
-  if (modo === "clasico" || modo === "infinito") return;
+  if (esTabla(modo)) return;
   g.intentos.slice().reverse().forEach(function (nombre) {
     const acierto = PERSONAJES.indexOf(MAPA[nombre]) === g.secreto;
     chips.appendChild(el("span", "chip" + (acierto ? " bien" : ""), (acierto ? "✓ " : "✗ ") + nombre));
@@ -1051,11 +1089,11 @@ function dibujarVictoria(g, sec) {
       '<p class="ganador">' + sec.n + "</p>" +
       "<p>Te rendiste tras <b>" + k + "</b> " + (k === 1 ? "intento" : "intentos") + ". ¡A la próxima lo consigues!</p>" +
       "<blockquote>«" + sec.v + "»<cite>" + sec.ref + "</cite></blockquote>" +
-      (modo === "infinito"
+      (esInf(modo)
         ? '<div class="acciones"><button class="placa" id="botonOtro">Otro personaje</button></div>'
         : '<p class="cuenta">Próximo personaje en <span class="reloj">--:--:--</span></p>');
     victoria.hidden = false;
-    if (modo === "infinito") {
+    if (esInf(modo)) {
       document.getElementById("botonOtro").addEventListener("click", function () { nuevoInfinito(); dibujar(false); });
     }
     actualizarReloj();
@@ -1068,11 +1106,11 @@ function dibujarVictoria(g, sec) {
     "<p>Lo encontraste en <b>" + k + "</b> " + (k === 1 ? "intento" : "intentos") + ".</p>" +
     "<blockquote>«" + sec.v + "»<cite>" + sec.ref + "</cite></blockquote>" +
     '<div class="acciones"><button class="placa" id="botonCompartir">Compartir resultado</button>' +
-    (modo === "infinito" ? '<button class="placa" id="botonOtro">Otro personaje</button>' : "") + "</div>" +
-    (modo !== "infinito" ? '<p class="cuenta">Próximo personaje en <span class="reloj">--:--:--</span></p>' : "");
+    (esInf(modo) ? '<button class="placa" id="botonOtro">Otro personaje</button>' : "") + "</div>" +
+    (!esInf(modo) ? '<p class="cuenta">Próximo personaje en <span class="reloj">--:--:--</span></p>' : "");
   victoria.hidden = false;
   document.getElementById("botonCompartir").addEventListener("click", compartir);
-  if (modo === "infinito") {
+  if (esInf(modo)) {
     document.getElementById("botonOtro").addEventListener("click", function () { nuevoInfinito(); dibujar(false); });
   }
   actualizarReloj();
@@ -1101,7 +1139,7 @@ function rendirse() {
   g.rendido = true;
   const s = stats(modo);
   if (g.intentos.length === 0) s.jugadas++;
-  if (modo !== "infinito") s.racha = 0;
+  if (!esInf(modo)) s.racha = 0;
   guardar();
   entrada.value = "";
   cerrarSugerencias();
@@ -1124,7 +1162,7 @@ function intentar(nombre) {
     g.ganado = true;
     s.ganadas++;
     s.intentos += g.intentos.length;
-    if (modo !== "infinito") {
+    if (!esInf(modo)) {
       if (s.ultimoGanado === AYER) s.racha++;
       else if (s.ultimoGanado !== HOY) s.racha = 1;
       s.ultimoGanado = HOY;
@@ -1137,7 +1175,7 @@ function intentar(nombre) {
   dibujar(true);
 
   if (acierto) {
-    const espera = (modo === "clasico" || modo === "infinito") ? (COLUMNAS.length + 1) * 300 + 400 : 300;
+    const espera = esTabla(modo) ? (COLUMNAS.length + 1) * 300 + 400 : 300;
     const modoActual = modo;
     setTimeout(function () {
       if (modo !== modoActual) return;
@@ -1213,9 +1251,9 @@ function compartir() {
   const sec = PERSONAJES[g.secreto];
   const k = g.intentos.length;
   const m = MODOS.filter(function (x) { return x.id === modo; })[0];
-  let txt = modo === "infinito" ? "Bibledl ♾️ Infinito\n" : "Bibledl #" + (numeroDia() + 1) + " · " + m.icono + " " + m.nombre + "\n";
+  let txt = esInf(modo) ? "Bibledl " + m.icono + " " + m.nombre + "\n" : "Bibledl #" + (numeroDia() + 1) + " · " + m.icono + " " + m.nombre + "\n";
   txt += "Lo encontré en " + k + " " + (k === 1 ? "intento" : "intentos") + " 🕊️\n";
-  if (modo === "clasico" || modo === "infinito") {
+  if (esTabla(modo)) {
     let filas = g.intentos.map(function (n) {
       return COLUMNAS.map(function (c) { return EMOJI_COLOR[comparar(MAPA[n], sec, c[0]).c]; }).join("");
     });
